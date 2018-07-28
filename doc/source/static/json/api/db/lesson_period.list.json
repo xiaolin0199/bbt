@@ -1,0 +1,61 @@
+{
+    "status": "success",
+    "data":
+    {
+        "records": [
+        {
+            "term__term_type": "秋季学期",
+            "uuid": "EB89DC5E-938A-11E7-89F6-C81F663C74F3",
+            "sequence": 1,
+            "start_time": "08:20:00",
+            "term__school_year": "2017-2018",
+            "end_time": "09:00:00"
+        },
+        {
+            "term__term_type": "秋季学期",
+            "uuid": "FCA214E1-938A-11E7-AAA6-C81F663C74F3",
+            "sequence": 2,
+            "start_time": "09:10:00",
+            "term__school_year": "2017-2018",
+            "end_time": "09:50:00"
+        },
+        {
+            "term__term_type": "秋季学期",
+            "uuid": "27AFCF5E-938B-11E7-A01B-C81F663C74F3",
+            "sequence": 3,
+            "start_time": "10:30:00",
+            "term__school_year": "2017-2018",
+            "end_time": "11:10:00"
+        },
+        {
+            "term__term_type": "秋季学期",
+            "uuid": "31F92C00-938B-11E7-B2AD-C81F663C74F3",
+            "sequence": 4,
+            "start_time": "11:20:00",
+            "term__school_year": "2017-2018",
+            "end_time": "12:00:00"
+        },
+        {
+            "term__term_type": "秋季学期",
+            "uuid": "5D611470-938B-11E7-97CA-C81F663C74F3",
+            "sequence": 5,
+            "start_time": "14:30:00",
+            "term__school_year": "2017-2018",
+            "end_time": "15:10:00"
+        },
+        {
+            "term__term_type": "秋季学期",
+            "uuid": "71EB6940-938B-11E7-A3D7-C81F663C74F3",
+            "sequence": 6,
+            "start_time": "15:25:00",
+            "term__school_year": "2017-2018",
+            "end_time": "16:05:00"
+        }],
+        "record_count": 6,
+        "page_count": 1,
+        "page_size": 25,
+        "max_sequence": 6,
+        "page": 1
+    },
+    "success": true
+}

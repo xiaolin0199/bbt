@@ -1,0 +1,28 @@
+{
+    "status": "success",
+    "msg": "编辑教师成功！",
+    "data":
+    {
+        "qq": "991924763",
+        "remark": "",
+        "uuid": "B73F81F0-552D-11E5-B79E-448A5BE3B0DC",
+        "sequence": 9,
+        "mobile": "13402729052",
+        "title": "小学二级",
+        "edu_background": "本科",
+        "sex": "female",
+        "deleted": false,
+        "school":
+        {
+            "parent": "3B5C5293-9640-50F4-AED3-E21E9C8C32A6",
+            "uuid": "E93C329E-1EF7-11E5-86FF-448A5BE3B0DC",
+            "group_type": "school",
+            "name": "希望小学"
+        },
+        "birthday": "1990-06-10",
+        "register_at": "2017-10-30",
+        "password": "0610",
+        "name": "王琴"
+    },
+    "success": true
+}

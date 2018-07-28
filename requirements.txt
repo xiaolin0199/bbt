@@ -1,0 +1,33 @@
+APScheduler==3.3.1
+autobahn==17.9.3
+Django==1.11.6
+django-rq==0.9.6
+oslo.config==4.12.0
+PyMySQL==0.7.11
+pymongo==3.5.1
+pypinyin==0.25.0
+pycrypto==2.6.1
+django-redis==4.8.0
+django-mysqlpool==0.1.post9
+requests==2.18.4
+upyun==2.5.1
+qiniu==7.1.7
+pyzmq==16.0.2
+Twisted==17.9.0
+python-memcached==1.58
+ntplib==0.3.3
+xlrd==1.1.0
+xlwt==1.3.0
+
+# dev
+ipython==5.3.0
+
+# windows
+# pypiwin32==219
+# pyOpenSSL==17.3.0
+# service-identity==17.0.0
+
+# doc
+# Sphinx==1.4.8
+# sphinx-rtd-theme==0.1.9
+# prettytable==0.7.2

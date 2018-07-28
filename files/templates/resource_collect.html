@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>噢易班班通管理分析系统 - 资源收集</title>
+<link rel="shortcut icon" type="image/ico" href="/public/images/favicon.ico">
+<link rel="icon" type="image/ico" href="/public/images/favicon.ico">
+<link type="text/css" rel="stylesheet" href="/public/js/extjs/resources/css/ext-all.css"/>
+<style type="text/css">
+.resource-view {font-size: 20px;line-height: 1.5;font-family: '微软雅黑';width: 100%;}
+.resource-view-item {position: relative;}
+</style>
+<script type="text/javascript" src="/public/js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="/public/js/extjs/locale/ext-lang-zh_CN.js"></script>
+<script type="text/javascript">
+var bbt = {
+    loadCurrentSchoolYear: function(cb){
+        Ext.Ajax.request({
+            url: '/system/term/current/',
+            callback: cb
+        });
+    }
+};
+Ext.define('bbt.ResourceCollect', {
+    extend: 'Ext.panel.Panel',
+    alias: 'widget.resourcecollect',
+    title: '资源收集',
+    initComponent: function(){
+    	this.tbar = [{
+    		xtype: 'combo',
+    		name: 'school_year',
+    		editable: false,
+    		labelWidth: 50,
+    		width: 160,
+    		fieldLabel: '学年',
+            queryMode: 'local',
+            displayField: 'school_year',
+            valueField: 'school_year',
+    		store: new Ext.data.Store({
+                fields: ['school_year', 'term_type'],
+                pageSize: 10,
+                listeners: {
+                    beforeload: function(s){
+                        Ext.Ajax.request({
+                            url: '/system/newterm/list/',
+                            callback: function(_, _2, resp){
+                                var data = Ext.decode(resp.responseText), ret = {}, keys;
+                                if(data.status == "success") {
+                                    Ext.each(data.data.records, function(item){
+                                        if(!(item.school_year in ret)) {
+                                            ret[item.school_year] = {
+                                                school_year: item.school_year,
+                                                term_type: []
+                                            };
+                                        }
+                                        ret[item.school_year].term_type.push({text: item.term_type, uuid: item.uuid});
+                                    });
+                                    keys = Ext.Object.getKeys(ret);
+                                    keys.sort().reverse();
+                                    ret = Ext.Array.map(keys, function(k){ return ret[k]; });
+                                    s.removeAll();
+                                    ret = s.add(ret);
+                                    s.fireEvent('load', s, ret);
+                                }
+                            }
+                        });
+                        return false;
+                    },
+                    load: function(s, rcs){
+                        var owner = s.owner;
+                        bbt.loadCurrentSchoolYear(function(opts, _, resp){
+                            var data = Ext.decode(resp.responseText), term, rc;
+                            if(data.status == "success") {
+                                owner.setValue(data.data.school_year);
+                                term = owner.ownerCt.down('[name=term_type]');
+                                rc = term.findRecordByDisplay(data.data.term_type);
+                                term.setValue(rc.get(term.valueField));
+                            }
+                        });
+                    }
+                }
+            }),
+            listeners: {
+                afterrender: function(){
+                    this.store.owner = this;
+                    this.store.load();
+                },
+                change:function(me, v){
+                    var rc, terms, term_type;
+                    rc = me.findRecordByValue(v);
+                    if(!rc) { return; }
+                    
+                    term_type = me.ownerCt.down('[name=term_type]');
+                    terms = rc.get('term_type');
+                    term_type.store.removeAll();
+                    term_type.store.add(terms);
+                    //term_type.store.fireEvent('load', term_type.store);
+                }
+            }
+    	}, {
+    		xtype: 'combo',
+    		name: 'term_type',
+    		editable: false,
+    		labelWidth: 50,
+    		width: 160,
+    		fieldLabel: '学期',
+    		queryMode: 'local',
+            displayField: 'text',
+            valueField: 'uuid',
+            store: new Ext.data.Store({
+                fields: ['text', 'uuid'],
+                listeners: {
+                    load: function(s, rcs){
+                        var rc = s.getAt(0);
+                        if(rc){
+                            s.owner.setValue(rc.get(s.owner.valueField));
+                        } else {
+                            s.owner.setValue('');
+                        }
+                    }
+                }
+            }),
+            listeners: {
+                afterrender: function(){ this.store.owner = this; },
+                change: function(me, v){
+                    var grade = me.ownerCt.down('[name=grade_name]');
+                    grade.store.load({params: {uuid: v}});
+                }
+            }
+    	}, {
+			xtype: 'combo',
+			name: 'grade_name',
+			fieldLabel: '年级',
+			editable: false,
+			labelWidth: 50,
+			width: 160,
+			queryMode: 'local',
+            displayField: 'grade_name',
+            valueField: 'id',
+			store: new Ext.data.Store({
+                fields: ['id', 'grade_name'],
+                proxy: {
+                    type: 'ajax',
+                    url: '/system/term/syllabus/grade-list/',
+                    reader: {type: 'json', root: 'data.records'}
+                },
+                sorters: [{
+                    sorterFn: function(rc1, rc2){
+                        var seqMap = {"一": 1,"二": 2,"三": 3,"四": 4,"五": 5,"六": 6,"七": 7,"八": 8,"九": 9,"十": 10},
+                            seq1, seq2, getSeq;
+                        getSeq = function(s){
+                            if((s.indexOf('十一') === 0)) { return 11; }
+                            if((s.indexOf('十二') === 0)) { return 12; }
+                            return seqMap[s];
+                        };
+                        seq1 = getSeq(rc1.get('grade_name'));
+                        seq2 = getSeq(rc2.get('grade_name'));
+                        return seq1 - seq2;
+                    }
+                }],
+                pageSize: 100,
+                listeners: {
+                    load: function(s, rcs){
+                        var rc = s.getAt(0);
+                        if(rc){
+                            s.owner.setValue(rc.get(s.owner.valueField));
+                        } else {
+                            s.owner.setValue('');
+                        }
+                    }
+                }
+            }),
+            listeners: {
+                afterrender: function(){ this.store.owner = this; },
+                change: function(me, v){
+                    var lesson = me.ownerCt.down('[name=lesson_name]'),
+                        term_uuid = me.ownerCt.down('[name=term_type]').getValue(), rc;
+                    rc = me.findRecordByValue(v);
+                    lesson.store.removeAll();
+                    lesson.store.load({params: {grade_name: rc.get(me.displayField), term_uuid: term_uuid}});
+                    /*Ext.Ajax.request({
+                        url: '/system/term/syllabus/lesson-list/',
+                        params: {id: v},
+                        callback: function(_1, _2, resp){
+                            var data = Ext.decode(resp.responseText);
+                            if(data.status == "success") {
+                                lesson.store.loadData(data.records);
+                            }
+                        }
+                    });*/
+                }
+            }
+		}, {
+			xtype: 'combo',
+			name: 'lesson_name',
+			fieldLabel: '科目',
+			editable: false,
+			labelWidth: 50,
+			width: 160,
+            displayField: 'lesson_name',
+            valueField: 'id',
+            queryMode: 'local',
+			store: new Ext.data.Store({
+                fields: ['lesson_name', 'id'],
+                proxy: {
+                    url: '/system/term/syllabus/lesson-list/',
+                    type: 'ajax',
+                    reader: {
+                        type: 'json',
+                        root: 'data.records'
+                    }
+                },
+                pageSize: 1000,
+                listeners: {
+                    load: function(s, rcs){
+                        var rc = s.getAt(0);
+                        if(rc) {
+                            s.owner.setValue(rc.get(s.owner.valueField));
+                        } else {
+                            s.owner.setValue('');
+                        }
+                    }
+                }
+            }),
+            listeners: {
+                afterrender: function(){ this.store.owner = this; },
+                change:function(me, v){
+                    var rc = me.findRecordByValue(v), edition;
+                    if(!rc) { return; }
+                    edition = me.ownerCt.down('[name=edition]');
+                    edition.setValue(rc.raw.edition);
+                    Ext.Ajax.request({
+                        url: '/system/term/syllabus/content-list/',
+                        method: 'GET',
+                        params: {id: v},
+                        callback: function(_1, _2, resp){
+                            var data = Ext.decode(resp.responseText);
+                            if(data.status == "success") {
+                                Ext.getCmp('app-menu').parseContentList(data);
+                            }
+                        }
+                    })
+                }
+            }
+		}, {
+			xtype: 'displayfield',
+			name: 'edition',
+			fieldLabel: '教材版本',
+			editable: false,
+			labelWidth: 60,
+			width: 160,
+			value: '人教版'
+		}/*, {
+			xtype: 'button',
+			text: '查询'
+		}*/];
+    	this.margin = 5;
+    	this.layout = {type: 'hbox', align: 'stretch'};
+    	this.items = [{
+    		xtype: 'treepanel',
+            id: 'app-menu',
+    		width: 240,
+    		rootVisible: false,
+    		style: {marginRight: '5px'},
+    		bodyStyle: {borderTopWidth: '0', borderLeftWidth: '0', borderBottomWidth: '0'},
+    		store: new Ext.data.TreeStore({
+    			root: {text: '全部', children: []}
+    		}),
+            parseContentList: function(data){
+                var nodes = {}, keys, sortFn, root = this.getRootNode();
+                Ext.each(data.data.records, function(rc){
+                    var id, pid, obj;
+                    if(!rc) { return; }
+                    id = rc.id;
+                    pid = rc.parent_id || rc.parent;
+                    if(pid) {
+                        obj = nodes[pid];
+                        if(!obj) {
+                            obj = nodes[pid] = {id: pid, expanded: true, children: []};
+                        }
+                        obj.children.push({text: rc.title, id: id, seq: rc.seq, leaf: true});
+                    } else {
+                        if(!nodes[id]) {
+                            nodes[id] = {text: rc.title, id: id, seq: rc.seq, expanded: true, children: []};
+                        } else {
+                            nodes[id].seq = rc.seq;
+                            nodes[id].text = rc.title;
+                        }
+                    }
+                });
+                sortFn = function(a, b){
+                    if(a.seq < b.seq) { return -1; }
+                    else if(a.seq > b.seq) { return 1; }
+                    return 0;
+                };
+
+                keys = Ext.Object.getKeys(nodes);
+                nodes = Ext.Array.map(keys, function(k){
+                    nodes[k].children.sort(sortFn);
+                    return nodes[k];
+                });
+                nodes.sort(sortFn);
+                root.removeAll();
+                nodes.length && root.appendChild(nodes);
+            },
+    		listeners: {
+    			itemclick: function(v, node, el, i, e){
+    				var p = Ext.getCmp('content-panel'), cmp;
+                    p.currentContentId = node.raw.id;
+                    cmp = p.down('[title=全部文档]');
+                    p.setActiveTab(cmp);
+                    cmp.getView().reload();
+    			}
+    		}
+    	}, {
+    		xtype: 'tabpanel',
+            id: 'content-panel',
+    		flex: 1,
+    		//tabBar: {height: 40},
+    		bodyStyle: {borderTopWidth:'0', borderBottomWidth: '0', borderRightWidth: '0'},
+    		items: Ext.Array.map(["全部文档", "教案", "课件", "试题", "导学案", "同步素材", "其它"], function(v){ return {xtype: 'resourcepanel', title: v}; }),
+    		listeners: {
+    			boxready: function(){
+    				this.down('tabbar').body.setStyle({borderTopColor: '#dde8f5', borderRightColor: '#dde8f5'});
+    			}
+    		}
+    	}];
+    	this.callParent();
+    }
+});
+Ext.define('bbt.ResourceView', {
+	extend: 'Ext.view.View',
+	alias: 'widget.resourceview',
+	itemSelector: 'div.resource-view-item',
+	tpl: ['<div class="resource-view"><tpl for="."><div class="resource-view-item"><p><a href="{courseware__qiniu_url}">{courseware__title}</a></p></div></tpl></div>'],
+	constructor: function(){
+		var store = new Ext.data.Store({
+            proxy: {
+                url: '/system/term/syllabus/courseware-list/',
+                type: 'ajax',
+                reader: {
+                    type: 'json',
+                    root: 'data.records'
+                }
+            },
+			fields: ['courseware__qiniu_url', 'courseware__title']
+		});
+		this.border = '1 0 0 0';
+		this.style = {borderColor: '#99bce8', borderStyle: 'solid'};
+		this.store = store;
+        this.listeners = {
+            show: function(){
+                Ext.get
+            }
+        };
+		this.callParent();
+	},
+    reload: function(){
+        var p = Ext.getCmp('content-panel');
+        if(this.currentContentId != p.currentContentId) {
+            this.store.load({params: {id: p.currentContentId}});
+            this.currentContentId = p.currentContentId;
+        }
+    }
+});
+Ext.define('bbt.ResourcePanel', {
+	extend: 'Ext.panel.Panel',
+	alias: 'widget.resourcepanel',
+	initComponent: function(){
+		//this.tbar = [{}];
+		this.items = [{xtype: 'resourceview'}];
+		this.callParent();
+	},
+    getView: function(){
+        return this.items.get(0);
+    }
+});
+Ext.onReady(function(){
+	Ext.Ajax.request({
+        url: '/details/',
+        callback: function(opts, _, resp){
+            var data, suc = false;
+            try {
+                data = Ext.decode(resp.responseText)||{};
+                suc = data.status == "success";
+            } catch (e) {
+            	suc = false;
+            }
+            if(suc) {
+            	Ext.getCmp('global-viewport').show();
+            } else {
+            	location.pathname = '/';
+            }
+        }
+    });
+	Ext.widget({
+		xtype: 'viewport',
+		layout: 'fit',
+		hidden: true,
+		id: 'global-viewport',
+		items: [{xtype: 'resourcecollect'}]
+	});
+});
+</script>
+</head>
+<body></body>
+</html>

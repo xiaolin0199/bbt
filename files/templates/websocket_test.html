@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<title>教学点终端模拟器</title>
+		<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
+		<style type="text/css">
+		body {background-color: #aaa;}
+		#data-chart {height: 300px;}
+		.win-control {position: absolute;z-index: 1000;top:7px;right:0;}
+	    .win-control button {border: 0; padding: 0;margin:0;display:inline-block;width: 30px;height:24px;background-color: transparent;outline: none;background-image: url(images/win.png);background-repeat: no-repeat;}
+	    .win-min {background-position: -60px 0;}
+	    .win-min:hover {background-position: -90px 0;}
+	    .win-close {background-position: 0 0;}
+	    .win-close:hover {background-position: -30px 0;}
+		#controller button {float: right;}
+	    .sidebar {position: absolute;top:300px;bottom:0;left:0;right:0;background-color: #FFF;overflow: auto;}
+	    .long-time,.long-no-response {color: red !important;}
+	    </style>
+		<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/static/js/jquery.flot.min.js"></script>
+		<script type="text/javascript" src="/static/js/websocket_test.js"></script>
+	</head>
+	<body>
+		<p id="controller" style="display:none;top:0;left:0;height:24px;border-bottom:1px solid #aaa;background:-webkit-linear-gradient(left,#2D78F4,#74A9FF);" class="win-control" draggable>
+			<button class="win-close"></button><button class="win-min"></button>
+		</p>
+		<div style="position: absolute;top: 25px;height:25px;line-height:25px;left: 60px;z-index: 100;font-weight:bold;">当前客户端数量：<span id="counter" style="color: #00FFE0;">0</span></div>
+		<div id="data-chart" class="well">
+		</div>
+		<div class="sidebar" drag="no">
+			<ul class="nav nav-tabs" id="side-tabs">
+				<li class="active"><a href="#client-list" data-toggle="tab">客户端</a></li>
+				<li><a href="#network-list" data-toggle="tab">网络</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="accordion tab-pane active" id="client-list"></div>
+				<div class="tab-pane" id="network-list">
+					<table class="table table-striped table-bordered tab-hover">
+						<thead>
+							<tr>
+								<th>请求开始时间</th>
+								<th>请求结束时间</th>
+								<th>耗时（毫秒）</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+			
+		</div>
+	</body>
+</html>

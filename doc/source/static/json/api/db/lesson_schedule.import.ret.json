@@ -1,0 +1,1127 @@
+{
+    "status": "success",
+    "data": [
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D1CF9B9E-B8A7-11E3-8D22-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "语文"
+        },
+        "weekday": "mon",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB57-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "09:00:00",
+            "start_time": "08:20:00",
+            "uuid": "EB89DC5E-938A-11E7-89F6-C81F663C74F3",
+            "sequence": 1
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D20307B0-B8A7-11E3-B044-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "数学"
+        },
+        "weekday": "tue",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB59-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "09:00:00",
+            "start_time": "08:20:00",
+            "uuid": "EB89DC5E-938A-11E7-89F6-C81F663C74F3",
+            "sequence": 1
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D1CF9B9E-B8A7-11E3-8D22-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "语文"
+        },
+        "weekday": "wed",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB5B-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "09:00:00",
+            "start_time": "08:20:00",
+            "uuid": "EB89DC5E-938A-11E7-89F6-C81F663C74F3",
+            "sequence": 1
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D20307B0-B8A7-11E3-B044-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "数学"
+        },
+        "weekday": "thu",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB5D-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "09:00:00",
+            "start_time": "08:20:00",
+            "uuid": "EB89DC5E-938A-11E7-89F6-C81F663C74F3",
+            "sequence": 1
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D1CF9B9E-B8A7-11E3-8D22-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "语文"
+        },
+        "weekday": "fri",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB5F-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "09:00:00",
+            "start_time": "08:20:00",
+            "uuid": "EB89DC5E-938A-11E7-89F6-C81F663C74F3",
+            "sequence": 1
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D1CF9B9E-B8A7-11E3-8D22-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "语文"
+        },
+        "weekday": "mon",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB61-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "09:50:00",
+            "start_time": "09:10:00",
+            "uuid": "FCA214E1-938A-11E7-AAA6-C81F663C74F3",
+            "sequence": 2
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D33BFCDE-B8A7-11E3-9C2A-C81F663C74F3",
+            "types": "小学",
+            "name": "品德与社会"
+        },
+        "weekday": "tue",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB63-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "09:50:00",
+            "start_time": "09:10:00",
+            "uuid": "FCA214E1-938A-11E7-AAA6-C81F663C74F3",
+            "sequence": 2
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D1CF9B9E-B8A7-11E3-8D22-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "语文"
+        },
+        "weekday": "wed",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB65-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "09:50:00",
+            "start_time": "09:10:00",
+            "uuid": "FCA214E1-938A-11E7-AAA6-C81F663C74F3",
+            "sequence": 2
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "2DE312C0-3231-11E4-AE3E-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "体育"
+        },
+        "weekday": "thu",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB67-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "09:50:00",
+            "start_time": "09:10:00",
+            "uuid": "FCA214E1-938A-11E7-AAA6-C81F663C74F3",
+            "sequence": 2
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D1CF9B9E-B8A7-11E3-8D22-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "语文"
+        },
+        "weekday": "fri",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB69-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "09:50:00",
+            "start_time": "09:10:00",
+            "uuid": "FCA214E1-938A-11E7-AAA6-C81F663C74F3",
+            "sequence": 2
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D329D470-B8A7-11E3-ADCD-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "音乐"
+        },
+        "weekday": "mon",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB6B-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "11:10:00",
+            "start_time": "10:30:00",
+            "uuid": "27AFCF5E-938B-11E7-A01B-C81F663C74F3",
+            "sequence": 3
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D1CF9B9E-B8A7-11E3-8D22-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "语文"
+        },
+        "weekday": "tue",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB6D-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "11:10:00",
+            "start_time": "10:30:00",
+            "uuid": "27AFCF5E-938B-11E7-A01B-C81F663C74F3",
+            "sequence": 3
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D20307B0-B8A7-11E3-B044-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "数学"
+        },
+        "weekday": "wed",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB6F-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "11:10:00",
+            "start_time": "10:30:00",
+            "uuid": "27AFCF5E-938B-11E7-A01B-C81F663C74F3",
+            "sequence": 3
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D1CF9B9E-B8A7-11E3-8D22-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "语文"
+        },
+        "weekday": "thu",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB71-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "11:10:00",
+            "start_time": "10:30:00",
+            "uuid": "27AFCF5E-938B-11E7-A01B-C81F663C74F3",
+            "sequence": 3
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D20307B0-B8A7-11E3-B044-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "数学"
+        },
+        "weekday": "mon",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB73-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "12:00:00",
+            "start_time": "11:20:00",
+            "uuid": "31F92C00-938B-11E7-B2AD-C81F663C74F3",
+            "sequence": 4
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "6712B280-C705-11E4-BBFA-C81F663C74F3",
+            "types": "小学,初中",
+            "name": "地校2"
+        },
+        "weekday": "tue",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB75-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "12:00:00",
+            "start_time": "11:20:00",
+            "uuid": "31F92C00-938B-11E7-B2AD-C81F663C74F3",
+            "sequence": 4
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D33BFCDE-B8A7-11E3-9C2A-C81F663C74F3",
+            "types": "小学",
+            "name": "品德与社会"
+        },
+        "weekday": "wed",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB77-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "12:00:00",
+            "start_time": "11:20:00",
+            "uuid": "31F92C00-938B-11E7-B2AD-C81F663C74F3",
+            "sequence": 4
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D1CF9B9E-B8A7-11E3-8D22-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "语文"
+        },
+        "weekday": "thu",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB79-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "12:00:00",
+            "start_time": "11:20:00",
+            "uuid": "31F92C00-938B-11E7-B2AD-C81F663C74F3",
+            "sequence": 4
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D31BF1C0-B8A7-11E3-84EA-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "美术"
+        },
+        "weekday": "mon",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB7B-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "15:10:00",
+            "start_time": "14:30:00",
+            "uuid": "5D611470-938B-11E7-97CA-C81F663C74F3",
+            "sequence": 5
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D31BF1C0-B8A7-11E3-84EA-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "美术"
+        },
+        "weekday": "tue",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB7D-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "15:10:00",
+            "start_time": "14:30:00",
+            "uuid": "5D611470-938B-11E7-97CA-C81F663C74F3",
+            "sequence": 5
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "2DE312C0-3231-11E4-AE3E-C81F663C74F3",
+            "types": "小学,初中,高中",
+            "name": "体育"
+        },
+        "weekday": "wed",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB7F-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "15:10:00",
+            "start_time": "14:30:00",
+            "uuid": "5D611470-938B-11E7-97CA-C81F663C74F3",
+            "sequence": 5
+        }
+    },
+    {
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "2C74DCC0-3231-11E4-B3B2-C81F663C74F3",
+            "types": "小学,初中",
+            "name": "班队活动"
+        },
+        "weekday": "fri",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "uuid": "A668BB81-A424-11E7-AD15-AC9E17829E7B",
+        "lesson_period":
+        {
+            "term": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+            "end_time": "16:05:00",
+            "start_time": "15:25:00",
+            "uuid": "71EB6940-938B-11E7-A3D7-C81F663C74F3",
+            "sequence": 6
+        }
+    }],
+    "success": true
+}

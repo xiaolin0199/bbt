@@ -1,0 +1,74 @@
+{
+    "status": "success",
+    "msg": "添加班级课程授课教师记录成功！",
+    "data":
+    {
+        "lesson_name__name": "科学",
+        "finished_time": 0,
+        "uuid": "9AAAEC07-A426-11E7-AD15-AC9E17829E7B",
+        "schedule_time": 3,
+        "class_uuid__grade__term__school_year": "2017-2018",
+        "class_uuid__grade__term__term_type": "秋季学期",
+        "class_uuid__grade__name": "一",
+        "lesson_name":
+        {
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "uuid": "D349B880-B8A7-11E3-9A43-C81F663C74F3",
+            "types": "小学",
+            "name": "科学"
+        },
+        "teacher__name": "丁艳",
+        "class_uuid__name": "1",
+        "class_uuid":
+        {
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3",
+            "grade":
+            {
+                "term":
+                {
+                    "school":
+                    {
+                        "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+                        "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+                        "group_type": "school",
+                        "name": "四维街小学"
+                    },
+                    "uuid": "DE02D9C0-8C5F-11E7-9FB8-C81F663C74F3",
+                    "end_date": "2018-02-09",
+                    "deleted": false,
+                    "schedule_time": 358,
+                    "school_year": "2017-2018",
+                    "term_type": "秋季学期",
+                    "start_date": "2017-09-01"
+                },
+                "number": 1,
+                "uuid": "84657BB1-938B-11E7-871A-C81F663C74F3",
+                "name": "一"
+            },
+            "number": 1,
+            "last_active_time": null,
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "name": "1"
+        },
+        "teacher":
+        {
+            "qq": "",
+            "remark": "",
+            "uuid": "285F6680-4EB7-11E4-8318-C81F663C74F3",
+            "sequence": 45,
+            "mobile": "",
+            "title": "",
+            "edu_background": "大专",
+            "sex": "female",
+            "deleted": false,
+            "school": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "birthday": "1992-03-14",
+            "register_at": "2017-03-20",
+            "password": "0314",
+            "name": "丁艳"
+        },
+        "login_time": 0
+    },
+    "success": true
+}

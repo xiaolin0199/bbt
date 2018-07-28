@@ -1,0 +1,28 @@
+{
+    "status": "success",
+    "msg": "添加教师成功！",
+    "data":
+    {
+        "qq": "",
+        "remark": "",
+        "uuid": "2278AE1C-A421-11E7-AD15-AC9E17829E7B",
+        "sequence": 66,
+        "mobile": "",
+        "title": "正高级",
+        "edu_background": "本科",
+        "sex": "male",
+        "deleted": false,
+        "school":
+        {
+            "parent": "03E6AC83-FBDE-5553-AE7A-6470C052882E",
+            "uuid": "A9AA3400-B8A7-11E3-8F0E-C81F663C74F3",
+            "group_type": "school",
+            "name": "四维街小学"
+        },
+        "birthday": "2017-09-01",
+        "register_at": "2017-09-28",
+        "password": "0901",
+        "name": "zhangsan"
+    },
+    "success": true
+}

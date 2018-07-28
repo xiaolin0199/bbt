@@ -1,0 +1,1091 @@
+﻿var bbtConfig = bbtConfig || {};
+Ext.apply(bbtConfig, {
+    template: {
+        grid: {
+            title: '',//字符串 - 要显示的表格的标题
+            url: '',//字符串 - 要显示的表格的数据源
+            tools: null, //数组 - 要显示的表格的过滤条件，条件名参见 app.js 公用工具集合
+            pagination: null, //or false是否启用分页
+            status: '', //字符串 - 要显示的表格右下角的消息文本
+            statusRender: function (template, paginationbar, store) {}, //格式化 status 的函数
+            columns: null,//
+            sorters: null, //
+            enableSummary: false//是否启用汇总
+        }
+    },
+    averageTeach: function(class_total, finished_time){
+        var v = 0;
+        try {
+            v = finished_time / class_total;
+        } catch (e) {
+            v = 0;
+        }
+        return v.toFixed(1);
+    },
+    getRate: function(op1, op2){
+        if(typeof op1 != "number") { op1 = 0; }
+        if(typeof op2 != "number") { op2 = 0; }
+        if(op2 === 0) {
+            return '0.00%';
+        } else {
+            return (100.0*op1/op2).toFixed(2) + '%';
+        }
+    },
+    bbtUsageLog: {
+        login: {
+            grid: {
+                title: '使用记录 > 班班通登录日志',
+                url: '/activity/logged-in/',
+                tools: [['qdate', 'startDate', 'endDate', 'country', 'town', 'school', 'grade', 'class'], ['jieci', 'course', 'iTeacherName', 'query']],
+                columns: [{
+                    text: "区县市",
+                    dataIndex: "country_name",
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '学校',
+                    dataIndex: 'school_name',
+                    width: 160
+                }, {
+                    text: '教师姓名',
+                    dataIndex: 'teacher_name'
+                }, {
+                    text: '节次',
+                    dataIndex: 'lesson_period_sequence',
+                    width: 50
+                }, {
+                    text: '年级',
+                    dataIndex: 'grade_name',
+                    renderer: function(v){ return v ? v + '年级' : '';}
+                }, {
+                    text: '班级',
+                    dataIndex: 'class_name',
+                    renderer: function(v){ return v ? v + '班' : ''; }
+                }, {
+                    text: '课程',
+                    dataIndex: 'lesson_name'
+                }, {
+                    text: '登录时间',
+                    width: 155,
+                    dataIndex: 'created_at'
+                }, {
+                    text: '使用时长（分钟）',
+                    dataIndex: 'time_used',
+                    renderer: function(v){
+                        var msg = '<span style="color: green;">正在上课</span>';
+                        if(r.get('teacherlogintimetemp') != null) {
+                            return msg;
+                        }
+                        if(typeof v == "number") {
+                            return Math.floor(v/60);
+                        }
+                    },
+                    flex: 1
+                }],
+                pagination: true,
+                query: {
+                    '_': '7',
+                    start_date: function(){ var d = new Date(); d.setDate(d.getDate()-7); return d; },
+                    end_date: function(){ return new Date(); }
+                }
+            }
+        },
+        unlogin: {
+            grid: {
+                title: '使用记录 > 班班通未登录日志',
+                url: '/activity/not-logged-in/',
+                tools: [['qdate', 'startDate', 'endDate', 'country', 'town', 'school', 'grade', 'class'], ['jieci', 'course', 'iTeacherName', 'query']],
+                columns: [{
+                    text: "区县市",
+                    dataIndex: "country_name",
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '学校',
+                    dataIndex: 'school_name',
+                    width: 160
+                }, {
+                    text: '教师姓名',
+                    dataIndex: 'teacher_name'
+                }, {
+                    text: '节次',
+                    dataIndex: 'lesson_period_sequence',
+                    width: 50
+                }, {
+                    text: '年级',
+                    dataIndex: 'grade_name',
+                    renderer: function(v){ return v ? v + '年级' : '';}
+                }, {
+                    text: '班级',
+                    dataIndex: 'class_name',
+                    renderer: function(v){ return v ? v + '班' : ''; }
+                }, {
+                    text: '课程',
+                    dataIndex: 'lesson_name'
+                }, {
+                    text: '未登录时间',
+                    width: 155,
+                    dataIndex: 'created_at',
+                    flex: 1
+                }],
+                pagination: true,
+                query: {
+                    '_': '7',
+                    start_date: function(){ var d = new Date(); d.setDate(d.getDate()-7); return d; },
+                    end_date: function(){ return new Date(); }
+                }
+            }
+        }
+    },
+    //班班通分析统计
+    bbtAnalyzeStatic: {
+        //授课次数比例统计
+        teachCount: {
+            title: '统计分析 > 班班通授课次数统计',
+            grid: [{
+                title: '按区县市统计',
+                url: '/statistic/teaching-time/by-country/',
+                exportUrl: '/statistic/teaching-time/by-country/export/',
+                tools: ['queryMethod', 'schoolYear', 'term', 'startDate', 'endDate', 'query', '->', 'export'],
+                columns: [{
+                    text: "区县市",
+                    dataIndex: "country_name",
+                    width: 160
+                }, {
+                    text: '班级总数',
+                    dataIndex: 'class_total'
+                }, {
+                    text: '班级平均授课次数',
+                    dataIndex: 'class_average',
+                    width: 160
+                }, {
+                    text: '实际授课次数',
+                    dataIndex: 'finished_time'
+                }, {
+                    text: '计划达标课时数（学期）',
+                    width: 150,
+                    dataIndex: 'schedule_time'
+                }, {
+                    text: '授课占比（%）',
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ return bbtConfig.getRate(r.get('finished_time'), r.get('schedule_time')); }
+                }],
+                statusTemplate: '合计：实际授课次数{finished_time}、计划达标课时总数{schedule_time}、授课占比{rate}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = Ext.merge({
+                            finished_time: 0,
+                            schedule_time: 0
+                        }, store.proxy.reader.rawData.data.total), rate;
+                        rate = bbtConfig.getRate(data.finished_time, data.schedule_time);
+                        data = Ext.merge({rate: rate}, data);
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true
+            }, {
+                title: '按街道乡镇统计',
+                url: '/statistic/teaching-time/by-town/',
+                exportUrl: '/statistic/teaching-time/by-town/export/',
+                tools: ['queryMethod', 'schoolYear', 'term', 'startDate', 'endDate', 'country', 'query', '->', 'export'],
+                columns: [{
+                    text: "区县市",
+                    dataIndex: "country_name",
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '班级总数',
+                    dataIndex: 'class_total'
+                }, {
+                    text: '班级平均授课次数',
+                    dataIndex: 'class_average',
+                    width: 140
+                }, {
+                    text: '实际授课次数',
+                    dataIndex: 'finished_time'
+                }, {
+                    text: '计划达标课时数（学期）',
+                    width: 150,
+                    dataIndex: 'schedule_time'
+                }, {
+                    text: '授课占比（%）',
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ return bbtConfig.getRate(r.get('finished_time'), r.get('schedule_time')); }
+                }],
+                statusTemplate: '合计：实际授课次数{finished_time}、计划达标课时总数{schedule_time}、授课占比{rate}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = Ext.merge({
+                            finished_time: 0,
+                            schedule_time: 0
+                        }, store.proxy.reader.rawData.data.total), rate;
+                        rate = bbtConfig.getRate(data.finished_time, data.schedule_time);
+                        data = Ext.merge({rate: rate}, data);
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true
+            }, {
+                title: '按学校统计',
+                url: '/statistic/teaching-time/by-school/',
+                exportUrl: '/statistic/teaching-time/by-school/export/',
+                tools: ['queryMethod', 'schoolYear', 'term', 'startDate', 'endDate', 'country', 'town', 'query', '->', 'export'],
+                columns: [{
+                    text: "区县市",
+                    dataIndex: "country_name",
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '学校',
+                    dataIndex: 'school_name',
+                    width: 160
+                }, {
+                    text: '班级总数',
+                    dataIndex: 'class_total'
+                }, {
+                    text: '班级平均授课次数',
+                    dataIndex: 'class_average',
+                    width: 140
+                }, {
+                    text: '实际授课次数',
+                    dataIndex: 'finished_time'
+                }, {
+                    text: '计划达标课时数（学期）',
+                    width: 150,
+                    dataIndex: 'schedule_time'
+                }, {
+                    text: '授课占比（%）',
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ return bbtConfig.getRate(r.get('finished_time'), r.get('schedule_time')); }
+                }],
+                statusTemplate: '合计：实际授课次数{finished_time}、计划达标课时总数{schedule_time}、授课占比{rate}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = Ext.merge({
+                            finished_time: 0,
+                            schedule_time: 0
+                        }, store.proxy.reader.rawData.data.total), rate;
+                        rate = bbtConfig.getRate(data.finished_time, data.schedule_time);
+                        data = Ext.merge({rate: rate}, data);
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true
+            }]
+        },
+        //班班通授课时长统计
+        timeUsedCount: {
+            title: '统计分析 > 班班通授课时长统计',
+            grid: [{
+                title: '按区县市统计',
+                url: '/statistic/time-used/by-country/',
+                exportUrl: '/statistic/time-used/by-country/export/',
+                tools: ['queryMethod', 'schoolYear', 'term', 'startDate', 'endDate', 'query', '->', 'export'],
+                columns: [{
+                    text: '区县市',
+                    dataIndex: 'country_name',
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '班级总数',
+                    dataIndex: 'class_count'
+                }, {
+                    text: '授课节次总数',
+                    dataIndex: 'lesson_count',
+                    width: 140
+                }, {
+                    text: '平均时长/节次（分钟）',
+                    dataIndex: 'xxx',
+                    width: 135,
+                    renderer: function(v, m, r){
+                        var time = r.get('total_time_used') || 0,
+                            count = r.get('lesson_count');
+                        time = Math.floor(time/60);
+                        if(!count) { return '0.00'; }
+                        else {
+                            return (time / count).toFixed(2);
+                        }
+                    }
+                }, {
+                    text: '总授课时长（分钟）',
+                    width: 150,
+                    flex: 1,
+                    dataIndex: 'total_time_used',
+                    renderer: function(v){
+                        return (v ? Math.floor(v/60) : 0);
+                    }
+                }],
+                statusTemplate: '合计：实际授课总时长 {total_time_used} 分钟',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = {
+                            total_time_used: Math.floor(store.proxy.reader.rawData.data.total_time_used/60)
+                        };
+                       return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true
+            }, {
+                title: '按街道乡镇统计',
+                url: '/statistic/time-used/by-town/',
+                exportUrl: '/statistic/time-used/by-town/export/',
+                tools: ['queryMethod', 'schoolYear', 'term', 'startDate', 'endDate', 'query', '->', 'export'],
+                columns: [{
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '班级总数',
+                    dataIndex: 'class_count'
+                }, {
+                    text: '授课节次总数',
+                    dataIndex: 'lesson_count',
+                    width: 140
+                }, {
+                    text: '平均时长/节次（分钟）',
+                    dataIndex: 'xxx',
+                    width: 135,
+                    renderer: function(v, m, r){
+                        var time = r.get('total_time_used') || 0,
+                            count = r.get('lesson_count');
+                        time = Math.floor(time/60);
+                        if(!count) { return '0.00'; }
+                        else {
+                            return (time / count).toFixed(2);
+                        }
+                    }
+                }, {
+                    text: '总授课时长（分钟）',
+                    width: 150,
+                    flex: 1,
+                    dataIndex: 'total_time_used',
+                    renderer: function(v){
+                        return (v ? Math.floor(v/60) : 0);
+                    }
+                }],
+                statusTemplate: '合计：实际授课总时长 {total_time_used} 分钟',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = {
+                            total_time_used: Math.floor(store.proxy.reader.rawData.data.total_time_used/60)
+                        };
+                       return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true
+            }, {
+                title: '按学校统计',
+                url: '/statistic/time-used/by-school/',
+                exportUrl: '/statistic/time-used/by-school/export/',
+                tools: ['queryMethod', 'schoolYear', 'term', 'startDate', 'endDate', 'town', 'query', '->', 'export'],
+                columns: [{
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '学校',
+                    dataIndex: 'school_name',
+                    width: 160
+                }, {
+                    text: '班级总数',
+                    dataIndex: 'class_count'
+                }, {
+                    text: '授课节次总数',
+                    dataIndex: 'lesson_count',
+                    width: 140
+                }, {
+                    text: '平均时长/节次（分钟）',
+                    dataIndex: 'xxx',
+                    width: 135,
+                    renderer: function(v, m, r){
+                        var time = r.get('total_time_used') || 0,
+                            count = r.get('lesson_count');
+                        time = Math.floor(time/60);
+                        if(!count) { return '0.00'; }
+                        else {
+                            return (time / count).toFixed(2);
+                        }
+                    }
+                }, {
+                    text: '总授课时长（分钟）',
+                    width: 150,
+                    flex: 1,
+                    dataIndex: 'total_time_used',
+                    renderer: function(v){
+                        return (v ? Math.floor(v/60) : 0);
+                    }
+                }],
+                statusTemplate: '合计：实际授课总时长 {total_time_used} 分钟',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = {
+                            total_time_used: Math.floor(store.proxy.reader.rawData.data.total_time_used/60)
+                        };
+                       return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true
+            }]
+        },
+        //授课人数比例统计
+        teacherNumber: {
+            title: '统计分析 > 班班通授课人数统计',
+            grid: [{
+                title: '按区县市统计',
+                url: '/statistic/teacher-active/by-country/',
+                exportUrl: '/statistic/teacher-active/by-country/export/',
+                tools: ['queryMethodEx', 'schoolYear', 'term', 'startDate', 'endDate', 'query', '->', 'export'],
+                columns: [{
+                    text: "区县市",
+                    dataIndex: "country_name",
+                    width: 160
+                }, {
+                    text: '授课教师总数',
+                    dataIndex: 'active_teachers'
+                }, {
+                    text: '登记教师总数',
+                    dataIndex: 'total_teachers'
+                }, {
+                    text: '授课占比（%）',
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ return bbtConfig.getRate(r.get('active_teachers'), r.get('total_teachers')); }
+                }],
+                statusTemplate: '合计：授课教师总数{active_teachers}、登记教师总数{total_teachers}、授课占比{rate}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = Ext.merge({
+                            total_teachers: 0,
+                            active_teachers: 0
+                        }, store.proxy.reader.rawData.data.total), rate;
+                        rate = bbtConfig.getRate(data.active_teachers, data.total_teachers);
+                        data = Ext.merge({rate: rate}, data);
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true,
+                query: {
+                    '_': '7',
+                    start_date: function(){ var d = new Date(); d.setDate(d.getDate()-7); return d; },
+                    end_date: function(){ return new Date(); }
+                }
+            }, {
+                title: '按街道乡镇统计',
+                url: '/statistic/teacher-active/by-town/',
+                exportUrl: '/statistic/teacher-active/by-town/export/',
+                tools: ['queryMethodEx', 'schoolYear', 'term', 'startDate', 'endDate', 'country', 'query', '->', 'export'],
+                columns: [{
+                    text: "区县市",
+                    dataIndex: "country_name",
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '授课教师总数',
+                    dataIndex: 'active_teachers'
+                }, {
+                    text: '登记教师总数',
+                    dataIndex: 'total_teachers'
+                }, {
+                    text: '授课占比（%）',
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ return bbtConfig.getRate(r.get('active_teachers'), r.get('total_teachers')); }
+                }],
+                statusTemplate: '合计：授课教师总数{active_teachers}、登记教师总数{total_teachers}、授课占比{rate}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = Ext.merge({
+                            total_teachers: 0,
+                            active_teachers: 0
+                        }, store.proxy.reader.rawData.data.total), rate;
+                        rate = bbtConfig.getRate(data.active_teachers, data.total_teachers);
+                        data = Ext.merge({rate: rate}, data);
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true,
+                query: {
+                    '_': '7',
+                    start_date: function(){ var d = new Date(); d.setDate(d.getDate()-7); return d; },
+                    end_date: function(){ return new Date(); }
+                }
+            }, {
+                title: '按学校统计',
+                url: '/statistic/teacher-active/by-school/',
+                exportUrl: '/statistic/teacher-active/by-school/export/',
+                tools: ['queryMethodEx', 'schoolYear', 'term', 'startDate', 'endDate', 'country', 'town', 'query', '->', 'export'],
+                columns: [{
+                    text: "区县市",
+                    dataIndex: "country_name",
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '学校',
+                    dataIndex: 'school_name',
+                    width: 160
+                }, {
+                    text: '授课教师总数',
+                    dataIndex: 'active_teachers'
+                }, {
+                    text: '登记教师总数',
+                    dataIndex: 'total_teachers'
+                }, {
+                    text: '授课占比（%）',
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ return bbtConfig.getRate(r.get('active_teachers'), r.get('total_teachers')); }
+                }],
+                statusTemplate: '合计：授课教师总数{active_teachers}、登记教师总数{total_teachers}、授课占比{rate}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = Ext.merge({
+                            total_teachers: 0,
+                            active_teachers: 0
+                        }, store.proxy.reader.rawData.data.total), rate;
+                        rate = bbtConfig.getRate(data.active_teachers, data.total_teachers);
+                        data = Ext.merge({rate: rate}, data);
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true,
+                query: {
+                    '_': '7',
+                    start_date: function(){ var d = new Date(); d.setDate(d.getDate()-7); return d; },
+                    end_date: function(){ return new Date(); }
+                }
+            }, {
+                title: '按学校课程统计',
+                url: '/statistic/teacher-active/by-lesson/',
+                exportUrl: '/statistic/teacher-active/by-lesson/export/',
+                tools: [['queryMethodEx', 'schoolYear', 'term', 'startDate', 'endDate'], ['country', 'town', 'school', 'course', 'query', '->', 'export']],
+                columns: [{
+                    text: "区县市",
+                    dataIndex: "country_name",
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '学校',
+                    dataIndex: 'school_name',
+                    width: 160
+                }, {
+                    text: '课程',
+                    dataIndex: 'lesson_name'
+                }, {
+                    text: '授课教师总数',
+                    dataIndex: 'active_teachers'
+                }, {
+                    text: '登记教师总数',
+                    dataIndex: 'total_teachers'
+                }, {
+                    text: '授课占比（%）',
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ return bbtConfig.getRate(r.get('active_teachers'), r.get('total_teachers')); }
+                }],
+                statusTemplate: '合计：授课教师总数{active_teachers}、登记教师总数{total_teachers}、授课占比{rate}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = Ext.merge({
+                            total_teachers: 0,
+                            active_teachers: 0
+                        }, store.proxy.reader.rawData.data.total), rate;
+                        rate = bbtConfig.getRate(data.active_teachers, data.total_teachers);
+                        data = Ext.merge({rate: rate}, data);
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true,
+                query: {
+                    '_': '7',
+                    start_date: function(){ var d = new Date(); d.setDate(d.getDate()-7); return d; },
+                    end_date: function(){ return new Date(); }
+                }
+            }]
+        },
+        //教师未登录班班通统计
+        unlogin: {
+            title: '统计分析 > 班班通未登录统计',
+            grid: [{
+                title: '按区县市统计',
+                url: '/statistic/teacher-absent/by-country/',
+                exportUrl: '/statistic/teacher-absent/by-country/export/',
+                tools: ['queryMethodEx', 'schoolYear', 'term', 'startDate', 'endDate', 'query', '->', 'export'],
+                columns: [{
+                    text: '区县市',
+                    dataIndex: 'country_name',
+                    width: 160
+                }, {
+                    text: '未登录教师总数',
+                    dataIndex: 'absent_teachers'
+                }, {
+                    text: '登记教师总数',
+                    dataIndex: 'total_teachers'
+                }, {
+                    text: '未授课占比（%）',
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ return bbtConfig.getRate(r.get('absent_teachers'), r.get('total_teachers')); }
+                }],
+                statusTemplate: '合计：未登录教师总数{absent_teachers}、登记教师总数{total_teachers}、未授课占比{rate}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = Ext.merge({
+                            absent_teachers: 0,
+                            total_teachers: 0
+                        }, store.proxy.reader.rawData.data.total), rate;
+                        rate = data.total_teachers === 0 ? 0 : data.absent_teachers / data.total_teachers;
+                        data = Ext.merge({rate: (100*rate).toFixed(2)+'%'}, data);
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true,
+                query: {
+                    '_': '7',
+                    start_date: function(){ var d = new Date(); d.setDate(d.getDate()-7); return d; },
+                    end_date: function(){ return new Date(); }
+                }
+            }, {
+                title: '按街道乡镇统计',
+                url: '/statistic/teacher-absent/by-town/',
+                exportUrl: '/statistic/teacher-absent/by-town/export/',
+                tools: ['queryMethodEx', 'schoolYear', 'term', 'startDate', 'endDate', 'country', 'query', '->', 'export'],
+                columns: [{
+                    text: '区县市',
+                    dataIndex: 'country_name',
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '未登录教师总数',
+                    dataIndex: 'absent_teachers'
+                }, {
+                    text: '登记教师总数',
+                    dataIndex: 'total_teachers'
+                }, {
+                    text: '未授课占比（%）',
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ return bbtConfig.getRate(r.get('absent_teachers'), r.get('total_teachers')); }
+                }],
+                statusTemplate: '合计：未登录教师总数{absent_teachers}、登记教师总数{total_teachers}、未授课占比{rate}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = Ext.merge({
+                            absent_teachers: 0,
+                            total_teachers: 0
+                        }, store.proxy.reader.rawData.data.total), rate;
+                        rate = data.total_teachers === 0 ? 0 : data.absent_teachers / data.total_teachers;
+                        data = Ext.merge({rate: (100*rate).toFixed(2)+'%'}, data);
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true,
+                query: {
+                    '_': '7',
+                    start_date: function(){ var d = new Date(); d.setDate(d.getDate()-7); return d; },
+                    end_date: function(){ return new Date(); }
+                }
+            }, {
+                title: '按学校统计',
+                url: '/statistic/teacher-absent/by-school/',
+                exportUrl: '/statistic/teacher-absent/by-school/export/',
+                tools: ['queryMethodEx', 'schoolYear', 'term', 'startDate', 'endDate', 'country', 'town', 'query', '->', 'export'],
+                columns: [{
+                    text: '区县市',
+                    dataIndex: 'country_name',
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '学校',
+                    dataIndex: 'school_name',
+                    width: 160
+                }, {
+                    text: '未登录教师总数',
+                    dataIndex: 'absent_teachers'
+                }, {
+                    text: '登记教师总数',
+                    dataIndex: 'total_teachers'
+                }, {
+                    text: '未授课占比（%）',
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ return bbtConfig.getRate(r.get('absent_teachers'), r.get('total_teachers')); }
+                }],
+                statusTemplate: '合计：未登录教师总数{absent_teachers}、登记教师总数{total_teachers}、未授课占比{rate}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = Ext.merge({
+                            absent_teachers: 0,
+                            total_teachers: 0
+                        }, store.proxy.reader.rawData.data.total), rate;
+                        rate = data.total_teachers === 0 ? 0 : data.absent_teachers / data.total_teachers;
+                        data = Ext.merge({rate: (100*rate).toFixed(2)+'%'}, data);
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true,
+                query: {
+                    '_': '7',
+                    start_date: function(){ var d = new Date(); d.setDate(d.getDate()-7); return d; },
+                    end_date: function(){ return new Date(); }
+                }
+            }, {
+                title: '按学校课程统计',
+                url: '/statistic/teacher-absent/by-lesson/',
+                exportUrl: '/statistic/teacher-absent/by-lesson/export/',
+                tools: [['queryMethodEx', 'schoolYear', 'term', 'startDate', 'endDate'], ['country', 'town', 'school', 'course', 'query', '->', 'export']],
+                columns: [{
+                    text: '区县市',
+                    dataIndex: 'country_name',
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '学校',
+                    dataIndex: 'school_name',
+                    width: 160
+                }, {
+                    text: '课程',
+                    dataIndex: 'lesson_name'
+                }, {
+                    text: '未登录教师总数',
+                    dataIndex: 'absent_teachers'
+                }, {
+                    text: '登记教师总数',
+                    dataIndex: 'total_teachers'
+                }, {
+                    text: '未授课占比（%）',
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ return bbtConfig.getRate(r.get('absent_teachers'), r.get('total_teachers')); }
+                }],
+                statusTemplate: '合计：未登录教师总数{absent_teachers}、登记教师总数{total_teachers}、未授课占比{rate}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = Ext.merge({
+                            absent_teachers: 0,
+                            total_teachers: 0
+                        }, store.proxy.reader.rawData.data.total), rate;
+                        rate = data.total_teachers === 0 ? 0 : data.absent_teachers / data.total_teachers;
+                        data = Ext.merge({rate: (100*rate).toFixed(2)+'%'}, data);
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {}, 0);
+                    }
+                },
+                pagination: true,
+                enableSummary: true,
+                query: {
+                    '_': '7',
+                    start_date: function(){ var d = new Date(); d.setDate(d.getDate()-7); return d; },
+                    end_date: function(){ return new Date(); }
+                }
+            }]
+        },
+        //授课资源使用统计
+        resource: {
+            title: '统计分析 > 班班通资源使用统计',
+            grid: [{
+                title: '学校资源来源统计',
+                url: '/statistic/resource/resource-from/',
+                exportUrl: '/statistic/resource/resource-from/export/',
+                tools: [['queryMethod', 'schoolYear', 'term', 'startDate', 'endDate'], ['country', 'town', 'school', 'resourceFrom', 'query', '->', 'export']],
+                columns: [{
+                    text: '区县市',
+                    dataIndex: 'country_name',
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '学校',
+                    dataIndex: 'school_name',
+                    width: 160
+                }, {
+                    text: '资源来源',
+                    dataIndex: 'resource_from'
+                }, {
+                    text: '访问次数',
+                    dataIndex: 'visit_count'
+                }, {
+                    text: '访问次数占比（%）',
+                    width: 120,
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ try{ var c=100*r.get('visit_count')/r.store.proxy.reader.rawData.data.total.visit_count; return c.toFixed(2)+'%'; }catch(e){ return '0%'; }}
+                }],
+                pagination: true,
+                statusTemplate: '合计：访问次数{visit_count}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = {
+                            visit_count: store.proxy.reader.rawData.data.total.visit_count
+                        };
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {visit_count:0}, 0);
+                    }
+                }
+            }, {
+                title: '学校资源类型统计',
+                url: '/statistic/resource/resource-type/',
+                exportUrl: '/statistic/resource/resource-type/export/',
+                tools: [['queryMethod', 'schoolYear', 'term', 'startDate', 'endDate'], ['country', 'town', 'school', 'resourceType', 'query', '->', 'export']],
+                columns: [{
+                    text: '区县市',
+                    dataIndex: 'country_name',
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '学校',
+                    dataIndex: 'school_name',
+                    width: 160
+                }, {
+                    text: '资源类型',
+                    dataIndex: 'resource_type'
+                }, {
+                    text: '访问次数',
+                    dataIndex: 'visit_count'
+                }, {
+                    text: '访问次数占比（%）',
+                    width: 120,
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ try{ var c=100*r.get('visit_count')/r.store.proxy.reader.rawData.data.total.visit_count; return c.toFixed(2)+'%'; }catch(e){ return '0%'; }}
+                }],
+                pagination: true,
+                statusTemplate: '合计：访问次数{visit_count}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = {
+                            visit_count: store.proxy.reader.rawData.data.total.visit_count
+                        };
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {visit_count:0}, 0);
+                    }
+                }
+            }, {
+                title : '学校课程使用统计',
+                url: '/statistic/resource/lesson/',
+                exportUrl: '/statistic/resource/lesson/export/',
+                tools: [['queryMethod', 'schoolYear', 'term', 'startDate', 'endDate'], ['country', 'town', 'school', 'course', 'query', '->', 'export']],
+                columns: [{
+                    text: '区县市',
+                    dataIndex: 'country_name',
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '学校',
+                    dataIndex: 'school_name',
+                    width: 160
+                }, {
+                    text: '课程',
+                    dataIndex: 'lesson_name'
+                }, {
+                    text: '访问次数',
+                    dataIndex: 'visit_count'
+                }, {
+                    text: '访问次数占比（%）',
+                    width: 120,
+                    dataIndex: '_',
+                    flex: 1,
+                    renderer: function(v,m,r){ try{ var c=100*r.get('visit_count')/r.store.proxy.reader.rawData.data.total.visit_count; return c.toFixed(2)+'%'; }catch(e){ return '0%'; }}
+                }],
+                pagination: true,
+                statusTemplate: '合计：访问次数{visit_count}',
+                statusRender: function(template, paginationbar, store) {
+                    try {
+                        var data = {
+                            visit_count: store.proxy.reader.rawData.data.total.visit_count
+                        };
+                        return bbtConfig.tmpl(template, data, 0);
+                    } catch (e) {
+                        return bbtConfig.tmpl(template, {visit_count:0}, 0);
+                    }
+                }
+            }]
+        },
+        //申报记录查询
+        assetlist: {
+            grid: {
+                title: '资产管理 > 资产申报记录查询',
+                url: '/asset/asset-log/',
+                exportUrl: '/asset/asset-log/export/',
+                columns: [{
+                    text: '区县市',
+                    dataIndex: 'country_name',
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '学校',
+                    dataIndex: 'school_name',
+                    width: 160
+                }, {
+                    text: '申报时间',
+                    dataIndex: 'reported_at',
+                    width: 150
+                }, {
+                    text: '申报类型',
+                    width: 60,
+                    dataIndex: 'log_type'
+                }, {
+                    text: '资产类型',
+                    dataIndex: 'asset_type__name'
+                }, {
+                    text: '设备型号',
+                    dataIndex: 'device_model'
+                }, {
+                    text: '数量',
+                    width: 50,
+                    dataIndex: 'number'
+                }, {
+                    text: '资产来源',
+                    dataIndex: 'asset_from'
+                }, {
+                    text: '申报用户',
+                    width: 60,
+                    dataIndex: 'reported_by'
+                }, {
+                    text: '备注',
+                    dataIndex: 'remark',
+                    flex: 1
+                }],
+                tools: [['qdate', 'startDate', 'endDate', 'country', 'town', 'school', 'assetReportType', 'assetType'], ['iDeviceModel', 'assetFrom', 'remark', 'report_user', 'query', '->', 'export']],
+                pagination: true
+            }            
+        },
+        //资产维修查询
+        assetrepairhistosy: {
+            grid: {
+                title: '资产管理 > 资产维修查询',
+                url: '/asset/asset-repair/',
+                exportUrl: '/asset/asset-repair/export/',
+                columns: [{
+                    text: '区县市',
+                    dataIndex: 'country_name',
+                    width: 160
+                }, {
+                    text: '街道乡镇',
+                    dataIndex: 'town_name',
+                    width: 160
+                }, {
+                    text: '学校',
+                    dataIndex: 'school_name',
+                    width: 160
+                }, {
+                    text: '维修时间',
+                    dataIndex: 'reported_at',
+                    width: 150
+                }, {
+                    text: '资产类型',
+                    dataIndex: 'asset_type__name'
+                }, {
+                    text: '设备型号',
+                    dataIndex: 'device_model'
+                }, {
+                    text: '年级',
+                    dataIndex: 'grade_name',
+                    renderer: function(v){ return v ? v+'年级' : '';}
+                }, {
+                    text: '班级',
+                    dataIndex: 'class_name',
+                    renderer: function(v){ return v ? v+'班' : '';}
+                }, {
+                    text: '申报用户',
+                    width: 60,
+                    dataIndex: 'reported_by'
+                }, {
+                    text: '备注',
+                    dataIndex: 'remark',
+                    flex: 1
+                }],
+                tools: [['qdate', 'startDate', 'endDate', 'country', 'town', 'school', 'grade', 'class'], ['report_user', 'assetType', 'iDeviceModel', /*'assetPos', */'remark', 'query', '->', 'export']],
+                pagination: true
+            }
+        }
+    }
+});

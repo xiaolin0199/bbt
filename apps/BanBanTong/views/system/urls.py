@@ -1,0 +1,198 @@
+# coding=utf-8
+from django.conf.urls import url
+
+import about
+import baseinfo
+import class_mac
+import computer_class_mac
+import desktop_preview
+# import install
+import lesson_name
+import lesson_period
+import lesson_schedule
+import lesson_teacher
+# import maintain
+import maintenance
+import new_lesson_name
+import newterm
+import node
+# import remote
+import resource
+import restore
+import role
+import school_server_setting
+import syllabus
+import sync_server
+import teacher
+import term
+import user
+import util
+
+
+# 基础信息
+urlpatterns = [
+    # 前端通用>
+    url(r'^lesson-period/list-sequence/?$', lesson_period.list_sequence),
+    url(r'^term/current-or-next/?$', term.get_current_or_next_term),
+    url(r'^term/nearest-one/?$', term.get_nearest_term),
+    url(r'^term/current/?$', term.get_current_term),
+    url(r'^lesson_teacher/remain_time/?$', lesson_teacher.get_remain_time),
+    # 前端其他API
+    # 危险操作需要用户输入admin密码再确认
+    url(r'^sudo/?$', util.sudo),
+
+    # 运维管理
+    url(r'^maintenance/list-system/?$', maintenance.list_system),
+    url(r'^maintenance/scheduler-shutdown/get/?$', maintenance.scheduler_shutdown_get),
+    url(r'^maintenance/scheduler-shutdown/?$', maintenance.scheduler_shutdown),
+    url(r'^maintenance/run-shutdown/?$', maintenance.run_shutdown),
+    url(r'^maintenance/run-reboot/?$', maintenance.run_reboot),
+    url(r'^maintenance/list-vnc/?$', maintenance.list_vnc),
+    url(r'^maintenance/run-vnc/?$', maintenance.run_vnc),
+    url(r'^maintenance/school-post/api/?$', maintenance.api_school_post),
+    url(r'^maintenance/school-post/list/?$', maintenance.list_school_post),
+    url(r'^maintenance/school-post/add/?$', maintenance.add_school_post),
+    url(r'^maintenance/school-post/edit/?$', maintenance.edit_school_post),
+    url(r'^maintenance/school-post/del/?$', maintenance.del_school_post),
+    # url(r'^maintenance/recv-msg/?$', maintenance.recv),
+    url(r'^maintenance/run-play-video/?$', maintenance.run_play_video),
+
+    # 系统设置>用户管理
+    url(r'^user/list/?$', user.list_current),
+    url(r'^user/add/?$', user.add),
+    url(r'^user/detail/?$', user.detail),
+    url(r'^user/edit/?$', user.edit),
+    url(r'^user/delete/?$', user.delete),
+    # 系统设置>角色管理
+    url(r'^role/list/?$', role.list_current),
+    url(r'^role/add/?$', role.add),
+    url(r'^role/detail/?$', role.detail),
+    url(r'^role/edit/?$', role.edit),
+    url(r'^role/delete/?$', role.delete),
+    # 系统设置>校级服务器设置
+    url(r'^school-server-setting/get/?$', school_server_setting.get),
+    url(r'^school-server-setting/set/?$', school_server_setting.set),
+    # 系统设置>基础信息同步查看
+    url(r'^baseinfo/term/?$', baseinfo.term),
+    url(r'^baseinfo/lesson-name/?$', baseinfo.lesson_name),
+    url(r'^baseinfo/resource-from/?$', baseinfo.resource_from),
+    url(r'^baseinfo/resource-type/?$', baseinfo.resource_type),
+    # 系统设置>桌面预览设置
+    url(r'^desktop-preview/get/?$', desktop_preview.get),
+    url(r'^desktop-preview/set/?$', desktop_preview.set),
+    url(r'^desktop-preview/verify/?$', desktop_preview.verify),
+    # 系统设置>资源管理
+    url(r'^resource/resource-from/?$', resource.resource_from),
+    url(r'^resource/resource-from/add/?$', resource.resource_from_add),
+    url(r'^resource/resource-from/delete/?$', resource.resource_from_delete),
+    url(r'^resource/resource-type/?$', resource.resource_type),
+    url(r'^resource/resource-type/add/?$', resource.resource_type_add),
+    url(r'^resource/resource-type/delete/?$', resource.resource_type_delete),
+    # 系统设置>教职人员信息管理
+    url(r'^teacher/list/?$', teacher.list_current),
+    url(r'^teacher/add/?$', teacher.add),
+    url(r'^teacher/edit/?$', teacher.edit),
+    url(r'^teacher/delete/?$', teacher.delete),
+    url(r'^teacher/export/?$', teacher.export),
+    url(r'^teacher/import/?$', teacher.import_from),
+    url(r'^teacher/verify/?$', teacher.verify),
+    url(r'^teacher/password-reset/?$', teacher.reset_pwd),
+    # 系统设置>学校开课课程管理
+    url(r'^lesson-name/list/?$', lesson_name.list_current),
+    url(r'^lesson-name/list/class/?$', lesson_name.list_current_class),
+    url(r'^lesson_name/add/?$', lesson_name.add),
+    url(r'^lesson_name/delete/?$', lesson_name.delete),
+    url(r'^lesson_name/import/?$', lesson_name.import_from),
+    url(r'^lesson_name/verify/?$', lesson_name.verify),
+    # 系统设置>学校开课课程管理(区县)
+    url(r'^new_lesson_name/list/?$', new_lesson_name.list_current),
+    url(r'^new_lesson_name/add/?$', new_lesson_name.add),
+    url(r'^new_lesson_name/edit/?$', new_lesson_name.edit),
+    url(r'^new_lesson_name/delete/?$', new_lesson_name.delete),
+    url(r'^new_lesson_name/import/?$', new_lesson_name.import_from),
+    url(r'^new_lesson_name/verify/?$', new_lesson_name.verify),
+    # 系统设置>学年学期管理
+    url(r'^term/list/?$', term.list_current),
+    url(r'^term/add/?$', term.add),
+    url(r'^term/edit/?$', term.edit),
+    url(r'^term/finish/?$', term.finish),
+    url(r'^term/import/?$', term.import_from),
+    url(r'^term/list_school_year/?$', term.list_school_year),
+    url(r'^term/verify/?$', term.verify),
+    # 系统设置>学年学期管理(区县)
+    url(r'^newterm/list/?$', newterm.list_current),
+    url(r'^newterm/current-or-next/?$', newterm.list_current_or_next),
+    url(r'^newterm/add/?$', newterm.add),
+    url(r'^newterm/edit/?$', newterm.edit),
+    url(r'^newterm/import/?$', newterm.import_from),
+    url(r'^newterm/finish/?$', newterm.finish),
+    url(r'^newterm/list_school_year/?$', newterm.list_school_year),
+    url(r'^newterm/verify/?$', newterm.verify),
+    # 系统设置>学年学期管理>关联教材大纲
+    url(r'^term/syllabus/grade-list/?$', syllabus.grade_list),
+    url(r'^term/syllabus/grade-set/?$', syllabus.grade_set),
+    url(r'^term/syllabus/grade-enable/?$', syllabus.grade_enable),
+    url(r'^term/syllabus/lesson-enable/?$', syllabus.lesson_enable),
+    url(r'^term/syllabus/lesson-list/?$', syllabus.lesson_list),
+    url(r'^term/syllabus/lesson-del/?$', syllabus.lesson_del),
+    url(r'^term/syllabus/content-list/?$', syllabus.content_list),
+    url(r'^term/syllabus/courseware-list/?$', syllabus.courseware_list),
+    url(r'^term/syllabus/remote-get/?$', syllabus.remote_get),
+    # 系统设置>学校作息时间管理
+    url(r'^lesson_period/list/?$', lesson_period.list_current),
+    url(r'^lesson_period/add/?$', lesson_period.add),
+    url(r'^lesson_period/edit/?$', lesson_period.edit),
+    url(r'^lesson_period/delete/?$', lesson_period.delete),
+    url(r'^lesson_period/import/?$', lesson_period.import_from),
+    url(r'^lesson_period/verify/?$', lesson_period.verify),
+    # 系统设置>年级班级管理>班班通教室
+    url(r'^class/list/?$', class_mac.list_current),
+    url(r'^class/add/?$', class_mac.add),
+    url(r'^class/batch_add/?$', class_mac.batch_add),
+    url(r'^class/delete/?$', class_mac.delete),
+    url(r'^class/clear_mac/?$', class_mac.clear_mac),
+    url(r'^class/import/?$', class_mac.import_from),
+    url(r'^class/verify/?$', class_mac.verify),
+    url(r'^class/edit/?$', class_mac.edit),
+    # 系统设置>年级班级管理>电脑教室
+    url(r'^computer-class/all/?$', computer_class_mac.list_current),
+    url(r'^computer-class/add/?$', computer_class_mac.add),
+    url(r'^computer-class/edit/?$', computer_class_mac.edit),
+    url(r'^computer-class/delete/?$', computer_class_mac.delete),
+    url(r'^computer-class/clear_mac/?$', computer_class_mac.clear_mac),
+    url(r'^computer-class/curriculum/?$', computer_class_mac.view_curriculum),
+    # 系统设置>班级课程综合管理>班级课程表管理
+    url(r'^lesson_schedule/list/?$', lesson_schedule.list_current),
+    url(r'^lesson_schedule/import/?$', lesson_schedule.import_from),
+    url(r'^lesson-schedule/export/?$', lesson_schedule.export),
+    url(r'^lesson_schedule/verify/?$', lesson_schedule.verify),
+    # 系统设置>班级课程综合管理>班级课程授课老师管理
+    url(r'^lesson_teacher/list/?$', lesson_teacher.list_current),
+    url(r'^lesson_teacher/add/?$', lesson_teacher.add),
+    url(r'^lesson_teacher/delete/?$', lesson_teacher.delete),
+    url(r'^lesson_teacher/edit/?$', lesson_teacher.edit),
+    url(r'^lesson_teacher/import/?$', lesson_teacher.import_from),
+    url(r'^lesson_teacher/export/?$', lesson_teacher.export),
+    url(r'^lesson_teacher/verify/?$', lesson_teacher.verify),
+    # 系统设置>上级服务器设置
+    url(r'^sync_server/add/?$', sync_server.add),
+    url(r'^sync_server/list/?$', sync_server.list_current),
+    url(r'^setting/get/?$', sync_server.get_settinginfo),
+    # 系统设置>数据恢复
+    url(r'^restore/?$', restore.restore),
+    # 系统设置>服务器汇聚管理
+    url(r'^node/add/?$', node.add),
+    url(r'^node/delete/?$', node.delete),
+    url(r'^node/edit/?$', node.edit),
+    url(r'^node/list/?$', node.list_current),
+    url(r'^node/backup/?$', node.backup),
+    # 帮助>关于
+    url(r'^about/?$', about.about),
+    # 帮助>授权信息
+    url(r'^activation/?$', about.activation),
+    url(r'^keys/(?P<seed>\w+)/?$', util.get_unlock_key),
+
+    url(r'^what-is-the-meaning-of/(?P<status>\w+)/?$', node.what_is_the_meaning_of),
+    url(r'^what-is-the-meaning-of/-(?P<status>\w+)/?$', node.what_is_the_meaning_of, {'foo': -1}),
+
+]

@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: BBT\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-26 18:54+0800\n"
+"PO-Revision-Date: 2017-11-01 08:58+0800\n"
+"Last-Translator: \n"
+"Language-Team: BBT\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.0.4\n"
+
+#: apps/BanBanTong/db/models.py:2259 apps/BanBanTong/db/models.py:2260
+msgid "Teacher"
+msgstr "教师"
+
+#: apps/BanBanTong/db/models.py:3090
+msgid "user"
+msgstr "用户"
+
+#: apps/BanBanTong/db/models.py:3091
+msgid "users"
+msgstr "用户"
+
+#: doc/theme/rtd/layout.html:51 doc/theme/rtd/layout_old.html:131
+msgid "About these documents"
+msgstr ""
+
+#: doc/theme/rtd/layout.html:55 doc/theme/rtd/layout_old.html:134
+msgid "Index"
+msgstr ""
+
+#: doc/theme/rtd/layout.html:59 doc/theme/rtd/layout_old.html:137
+#: doc/theme/rtd/search.html:11
+msgid "Search"
+msgstr ""
+
+#: doc/theme/rtd/layout.html:62 doc/theme/rtd/layout_old.html:140
+msgid "Copyright"
+msgstr ""
+
+#: doc/theme/rtd/layout_old.html:29
+msgid "Navigation"
+msgstr ""
+
+#: doc/theme/rtd/search.html:33
+msgid "Search Results"
+msgstr ""
+
+#: doc/theme/rtd/search.html:35
+msgid ""
+"Your search did not match any documents. Please make sure that all words are "
+"spelled correctly and that you've selected enough categories."
+msgstr ""
+
+#: utils/__init__.py:59
+#, python-format
+msgid "Bad argument type `translate`(%(translate)s), which should be a dict."
+msgstr ""
+
+#: utils/decorator.py:68
+msgid "you are not authenticated"
+msgstr ""
+
+#: utils/decorator.py:81
+#, python-format
+msgid "malformed JSON request: %(err)s"
+msgstr ""
+
+#: utils/decorator.py:88
+#, python-format
+msgid "Internal Server Error: %(err)s"
+msgstr ""
+
+#: utils/decorator.py:237
+msgid "Insufficient account balance."
+msgstr ""
+
+#: utils/validators.py:14
+msgid "Enter a valid port range."
+msgstr ""
+
+#: utils/validators.py:40
+msgid "Range start should be less then range end."
+msgstr ""
+
+#: utils/validators.py:41
+msgid "Range number should be in the range from 1 to 65535."
+msgstr ""

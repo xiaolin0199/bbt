@@ -1,0 +1,40 @@
+{
+    "status": "success",
+    "data":
+    {
+        "page_count": 1,
+        "records": [
+        {
+            "qq": "991924763",
+            "remark": "",
+            "uuid": "B73F81F0-552D-11E5-B79E-448A5BE3B0DC",
+            "sequence": 9,
+            "mobile": "13402729052",
+            "title": "小学二级",
+            "edu_background": "本科",
+            "sex": "female",
+            "birthday": "1990-06-10",
+            "status_count": 10,
+            "register_at": "2017-10-30",
+            "name": "王琴"
+        },
+        {
+            "qq": "",
+            "remark": "",
+            "uuid": "71CE2E21-BDD9-11E7-967F-00155D2A0102",
+            "sequence": 50,
+            "mobile": "",
+            "title": "",
+            "edu_background": "大专",
+            "sex": "male",
+            "birthday": "2017-10-31",
+            "status_count": 0,
+            "register_at": "2017-10-31",
+            "name": "张三"
+        }],
+        "record_count": 2,
+        "page": 1,
+        "page_size": 25
+    },
+    "success": true
+}

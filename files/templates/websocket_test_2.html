@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <title>班班通 | Websocket</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <link href="/public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <script src="/public/js/jquery.min.js"></script>
+  <script src="/public/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  var sock = null;
+  var ellog = null;
+  var sock_name = "sock"
+  var category = "";
+  var host = '219.138.116.130:8000';
+
+  window.onload = function() {
+    ellog = document.getElementById('log');
+    var wsuri;
+    if (host) {
+      wsuri = "ws://" + host + "/ws8002/localserver";
+      ws_sync = "ws://" + host + "/ws8002/sync";
+    } else {
+      if (window.location.protocol === "file:") {
+        wsuri = "ws://127.0.0.1:8001/ws/localserver";
+        ws_sync = "ws://127.0.0.1:8001/ws/sync";
+      } else {
+        wsuri = "ws://" + window.location.hostname + ":8001/ws/localserver";
+        ws_sync = "ws://" + window.location.hostname + ":8001/ws/sync";
+      }
+
+    }
+
+    if ("WebSocket" in window) {
+      sock = new WebSocket(wsuri);
+      ws_sync_sock = new WebSocket(ws_sync);
+    } else if ("MozWebSocket" in window) {
+      sock = new MozWebSocket(wsuri);
+      ws_sync_sock = new MozWebSocket(ws_sync);
+    } else {
+      log("Browser does not support WebSocket!");
+      window.location = "http://autobahn.ws/unsupportedbrowser";
+    }
+
+    if (sock) {
+      sock.onopen = function() {
+        log("Connected to " + wsuri);
+      }
+      sock.onclose = function(e) {
+        log("Connection closed (wasClean = " + e.wasClean + ", code = " + e.code + ", reason = '" + e.reason + "')");
+        sock = null;
+      }
+      sock.onmessage = function(e) {
+        log("返回: " + e.data);
+      }
+    }
+
+    if (ws_sync_sock) {
+      ws_sync_sock.onopen = function() {
+        log("Connected to " + ws_sync);
+      }
+      ws_sync_sock.onclose = function(e) {
+        log("Connection closed (wasClean = " + e.wasClean + ", code = " + e.code + ", reason = '" + e.reason + "')");
+        ws_sync_sock = null;
+      }
+      ws_sync_sock.onmessage = function(e) {
+        log("返回: " + e.data);
+      }
+    }
+  };
+
+  function send(sock_name) {
+    var server_type = $("input[name='server_type']:checked").val();
+    console.log(server_type);
+    if (server_type == "localserver") {
+      current_ws_sock = sock;
+    } else if (server_type == "sync") {
+      current_ws_sock = ws_sync_sock;
+    } else {
+      ellog.innerHTML = '请选择服务器\n';
+      return;
+    }
+
+    if (!current_ws_sock) {
+      ellog.innerHTML = '连接丢失,重连中...';
+      window.location.reload();
+    } else {
+      var msg = document.getElementById('message').value;
+      if (!msg) {
+        ellog.innerHTML = '请输入发送内容\n';
+        return;
+      }
+      if (current_ws_sock) {
+        current_ws_sock.send(msg);
+        log("发送: " + msg);
+      } else {
+        log("Not connected.");
+      }
+
+    }
+  };
+
+  function log(m) {
+    ellog.innerHTML += m + '\n';
+    ellog.scrollTop = ellog.scrollHeight;
+  };
+
+  function clearing() {
+    ellog.innerHTML = '';
+  };
+
+
+  function set_input(category) {
+    var target = document.getElementById('message');
+    switch (category) {
+      case "localserver":
+        target.value = '{"category":"localserver","operation":"nodeinfo","callback":"callback-0"}';
+        break;
+      case "login":
+        target.value = '{"category": "sync", "operation": "login", "data": {"db_version": 999, "uuid": "BF16D7E1-B8BA-11E3-BD02-00297F45632F", "parent": {"name": "花山龙凤镇", "group_type": "town", "uuid": "8FFDDFF9-9DDE-5595-BEB2-998DAE0EA227"}, "server_type": "school", "synclog_max_id": 102981, "key": "BBB6230BFB5CFBFE", "name": "小龙潭小学","used_quota":2}}';
+
+        break;
+      case "remote-data":
+        target.value = '{"category": "sync", "operation": "remote-data", "data": {"key": "FC28B9F2627AB222"}}';
+        break;
+      default:
+        target.value = "xxx";
+    };
+
+  };
+
+  function get_host() {
+    return window.location.host;
+  }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="text-center">班班通Websocket连接</h1>
+    <form role="form">
+      <div>
+        <b> 发送内容: </b>
+        <br>
+        <textarea style="width: 100%; height: 7em;" id="message" name="message"></textarea>
+      </div>
+      <div>
+        <b>选择传输内容:</b>
+        <a onClick='set_input("localserver")'>服务器汇聚管理</a>
+        <a onClick='set_input("login")'>登录</a>
+        <a onClick='set_input("remote-data")'>回传</a>
+      </div>
+      <div class="form-inline">
+        <b>选择连接主体:</b>
+        <label for="localserver">本地服务器</label>
+        <input class="form-contral" id="localserver" name="server_type" type="radio" value="localserver" />
+        <label for="sync">上级服务器</label>
+        <input class="form-contral" id="sync" type="radio" name="server_type" value="sync" />
+      </div>
+    </form>
+    <button class="btn btn-default" onclick='send();'>提交</button>
+    <button class="btn btn-default" onclick='clearing();'>清空</button>
+    <pre id="log" style="height: 40em; overflow-y: scroll; background-color: #faa;"></pre>
+  </div>
+</body>
+
+</html>

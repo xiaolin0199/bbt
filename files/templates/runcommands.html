@@ -1,0 +1,16 @@
+{% load static %}<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>Run Commands Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+</head>
+<body>
+<div class="container">
+    <form id="runCmdFrm" name="runCmdFrm" method="POST" action="{% url 'test:cmd' %}">{% csrf_token %}
+        <label for="password">请出入通关密码</label>
+        <input id="password" name="password" type="password"/>
+    </form>
+</div>
+</body>
+</html>

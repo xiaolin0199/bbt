@@ -1,0 +1,13 @@
+*~
+*.pyc
+*.pyo
+*.swp
+/settings.ini
+/version.ini
+
+/build
+/doc/build
+/files/logs/
+/files/tmp/
+/.tags
+/.tags_sorted_by_file

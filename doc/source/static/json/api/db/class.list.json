@@ -1,0 +1,27 @@
+{
+    "status": "success",
+    "data":
+    {
+        "page_count": 3,
+        "records": [
+        {
+            "assigned_time": 310,
+            "name": "1",
+            "grade__name": "一",
+            "classtime__schedule_time": null,
+            "grade__term__school_year": "2017-2018",
+            "teacher__birthday": "1977-11-25",
+            "classtime__assigned_time": null,
+            "grade__term__term_type": "秋季学期",
+            "teacher__name": "王冬菊",
+            "grade__term__schedule_time": 358,
+            "classmacv2__mac": "94-DE-80-CE-AC-55",
+            "teacher": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "uuid": "84788E80-938B-11E7-9D4A-C81F663C74F3"
+        }],
+        "record_count": 1,
+        "page": 1,
+        "page_size": 5
+    },
+    "success": true
+}

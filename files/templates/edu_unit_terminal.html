@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<title>教学点终端模拟器</title>
+		<script type="text/javascript">
+    	var isHttp = location.href.indexOf('http') === 0,
+    		isOeBrowser = window.app && app.window,
+    		remoteHost,
+    		prefix = isHttp ? '/static' : '.';
+    	if(isOeBrowser) {
+    		(function(){
+    			var tmp = app.screen.size(),
+    				type = app.file.read_ini(app.application.path() + 'settings.ini', 'data', 'terminalType'),
+    				x = (tmp.width - 400) / 2, y;
+    			app.window.size({width: 400, height: 320});
+    			if(!type) {
+    				y = (tmp.height - 320) / 2;
+    			} else if(type.indexOf(',') > -1) {
+    				y = (tmp.height - 561) / 2;
+    			} else if(type.indexOf('room') === 0) {
+    				y = (tmp.height - 435) / 2;
+    			} else if(type.indexOf('moon') === 0) {
+    				y = (tmp.height - 339) / 2;
+    			}
+    			app.window.position({x: x, y: y});
+    		})();
+    		prefix = '.';
+    	} else {
+    		if(isHttp) {
+    			prefix = '/static';
+    			remoteHost = location.host;
+    		} else {
+    			prefix = '../public';
+    			remoteHost = '127.0.0.1:8001';
+    		}
+    		document.write('<script type="text/javascript" src="' + prefix + '/js/oebrowser.js"></s' + 'cript>');
+    	}
+    	document.write('<link rel="stylesheet" type="text/css" href="' + prefix + '/bootstrap/css/bootstrap.min.css">');
+		document.write('<script type="text/javascript" src="' + prefix + '/js/jquery.min.js"></' + 'script>');
+		document.write('<script type="text/javascript" src="' + prefix + '/bootstrap/js/bootstrap.min.js"></s' + 'cript>');
+		document.write('<script type="text/javascript" src="' + prefix + '/js/edu_unit_terminal.js"></' + 'script>');
+	    </script>
+		<style type="text/css">
+		body {background-color: #aaa;overflow: hidden;font-size: 14px;font-family: "微软雅黑","宋体";}
+		p,h3,h4,label,a,button,.text,.label {-webkit-user-select: none;}
+	    .info {margin:0;padding:0;}
+	    .info li {display: block;}
+	    .info .text{display: block;font-size:14px;cursor: pointer;}
+	    .info .text-inline {display: inline;}
+	    .info .value {margin-left: 1.5em;font-family: "宋体";line-height: 2;font-size: 12px}
+	    .emulator {width: 398px;height: 318px;overflow: hidden;border:1px solid #aaa;background-color: #FFF;background-repeat: no-repeat;}
+	    .win-control {position: absolute;z-index: 8888;top:2px;right:0;}
+	    .win-control button {border: 0; padding: 0;margin:0;display:inline-block;width: 30px;height:24px;background-color: transparent;outline: none;background-repeat: no-repeat;}
+	    .win-min {background-position: -60px 0;}
+	    .win-min:hover {background-position: -90px 0;}
+	    .win-close {background-position: 0 0;}
+	    .win-close:hover {background-position: -30px 0;}
+	    #page-default p {text-align: center;padding-top: 120px;}
+	    /*#page-report .control-label {width: 80px;}
+	    #page-report .controls {margin-left: 105px;}
+	    #page-report input[type="text"] {width: 175px;}*/
+	    #page-report input[type="checkbox"] {vertical-align: bottom;}
+	    #myCarousel {position: absolute;bottom:0;top: 45px;left:0;right:0;margin-bottom: 0;}
+	    #myCarousel .carousel-inner{height: 100%;}
+	    #myCarousel .item {height: 100%;}
+	    #myCarousel form {margin: 0 20px 0 25px;}
+	    #page-report h3 {position: relative;font-weight: normal;}
+	    #page-report h3 .line {position: absolute;width: 100%;border-top:1px solid #CCC;top:22px;left:0;}
+	    #page-report h3 span {position: absolute;top:0;left:20px;padding: 0 5px;background-color: #FFF}
+	    .form-horizontal .control-group {margin: 0;}
+	    .form-horizontal .control-group input {width:190px;}
+	    .form-horizontal .control-group + .control-group {margin-top: 5px;}
+	    .form-horizontal label {width: 100px !important;text-align: left !important;}
+	    .form-horizontal .controls {margin-left: 140px !important;}
+	    section {position: relative;display: none;top:91px;}
+	    section h3 {text-align: center;height: 45px;margin:0;line-height: 45px;font-size: 18px;}
+	    section h4 {height: 30px;margin:0;line-height: 16px;font-size: 16px;font-weight: normal;}
+	    .progress-wrapper {margin: 0 20px;position: relative;border:1px solid #aaa;height:20px;border-radius: 3px;}
+	    .progress-wrapper .progress {width: 30%;position: absolute;top:0;-webkit-animation:connect 3s linear infinite;}
+	    @-webkit-keyframes connect {
+	    	0% {left:0;}
+	    	50% {left: 70%;}
+	    	100% {left:0;}
+	    }
+	    #indicator-transparent {color: #FFF;}
+	    .footer-msg {position: absolute;text-align: center;bottom: 36px;color: red;width: 100%;}
+	    .report-footer {position: absolute;text-align: center;bottom: 10px;width: 100%;}
+	    .report-footer button + button {margin-left: 40px;}
+	    #page-normal {padding: 20px;}
+	    #page-normal .header {height: 30px;line-height: 30px;text-align: left;position: relative;}
+	    #page-normal .header .title {position: absolute;top:0;left:0;background-color: #FFF;padding: 0 5px 0 0;font-weight: bold}
+	    #page-normal .header .toggle {position: absolute;width:20px;height:20px;top:5px;right:0;background-color: #FFF;cursor: pointer;}
+	    #page-normal .header .collapse {background: url(images/edupoint/collapse.png) no-repeat center center;}
+	    #page-normal .header .expand {background: url(images/edupoint/expand.png) no-repeat center center;}
+	    #page-normal .header .line {position: absolute;border-top:1px solid #CCC;height: 0px;top:15px;left:0;right:25px;}
+	    #page-normal .body {display: none;}
+	    #page-normal .body .label-text {font-weight: bold;font-size: 12px}
+	    #page-normal .body .value {padding-left: 1em;}
+	    .loading {position: absolute;z-index: 9999;top:0;left:0;right:0;bottom:0;opacity: 0.4;background:#FFF;background-repeat: no-repeat;background-position:  center center;display: none;}
+	    #offline-indicator {position: absolute;z-index: 1000;top:0;left:0;right:0;bottom:0;opacity: 0.4;display: none;background-color: #888;}
+	    #submit-confirm {width: 360px; margin-left: -180px; top: 50px;}
+	    </style>
+	</head>
+	<body>
+		<div class="emulator">
+			<p class="win-control" id="win-controller">
+				<button class="win-min"></button><button class="win-close"></button>
+			</p>
+			<!--
+			<section id="page-default">
+				<p>正在连接服务器 <span id="indicator">.</span><span id="indicator-transparent">.....</span></p>
+				<div class="progress-wrapper">
+					<div class="progress progress-striped active">
+						<div class="bar" style="width: 100%;"></div>
+					</div>
+				</div>
+			</section> -->
+			<section id="page-report">
+				<h3><i class="line"></i><span>教学点终端申报</span></h3>
+				<div id="myCarousel" class="carousel slide">
+					<div class="carousel-inner">
+						<div class="active item">
+							<form id="select-type">
+								<h4>选择终端类型</h4>
+								<p class="info">
+									<span class="text"><input type="checkbox" name="type" value="recv"/> 卫星接收终端</span>
+									<span class="value">通过本地卫星接收卡，接收卫星教学资源。</span>
+								</p>
+								<p class="info" style="margin-top:8px;">
+									<span class="text"><input type="checkbox" name="type" value="class"/> 教室终端</span>
+									<span class="value">通过教室终端和多媒体资源课件，进行信息化教学。</span>
+								</p>
+							</form>
+							<p class="footer-msg"></p>
+							<div class="report-footer">
+								<button role="next" action="select" type="button" class="btn">下一步 <i class="icon-chevron-right"></i></button>
+							</div>
+						</div>
+						<div class="item">
+							<form class="form-horizontal">
+								<h4>请输入终端密钥</h4>
+								<div class="control-group" id="key-recv">
+									<label class="control-label">卫星接收终端：</label>
+									<div class="controls">
+										<input type="text" name="key">
+									</div>
+								</div>
+								<div class="control-group" id="key-class">
+									<label class="control-label">教室终端：</label>
+									<div class="controls">
+										<input type="text" name="key">
+									</div>
+								</div>
+							</form>
+							<p class="footer-msg"></p>
+							<div class="report-footer">
+								<button role="prev" type="button" class="btn"><i class="icon-chevron-left"></i> 上一步</button>
+								<button role="checkkey" action="required" type="button" class="btn">下一步 <i class="icon-chevron-right"></i></button>
+							</div>
+						</div>
+						<div class="item">
+							<form>
+								<h4>申报信息确认</h4>
+								<ul class="info">
+									<li id="report-location"><span class="text text-inline" style="font-size:14px;">教学点位置：</span><span class="value"></span></li>
+									<li id="report-name"><span class="text text-inline" style="font-size:14px;">教学点名称：</span><span class="value"></span></li>
+									<li id="report-type"><span class="text text-inline" style="font-size:14px;">终端类型：</span><span class="value"></span></li>
+									<li id="report-no"><span class="text text-inline" style="font-size:14px;">教室编号：</span><span class="value"></span></li>
+								</ul>
+							</form>
+							<div class="report-footer">
+								<button role="prev" type="button" class="btn"><i class="icon-chevron-left"></i> 上一步</button>
+								<button role="submit" type="button" class="btn btn-primary">确定</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</section>
+			<section id="page-normal">
+				<div role="wrapper">
+					<div id="base-card">
+						<div class="header">
+							<div class="line"></div>
+							<span class="title">基础信息</span>
+							<a class="toggle expand"></a>
+						</div>
+						<div class="body" style="display: block;">
+							<p role="{base.location}">
+								<span class="label-text">教学点位置</span>
+								<span class="value"></span>
+							</p>
+							<p role="{base.point_name}">
+								<span class="label-text">教学点名称</span>
+								<span class="value"></span>
+							</p>
+						</div>
+					</div>
+					<div id="moon-card">
+						<div class="header">
+							<div class="line"></div>
+							<span class="title">卫星接收</span>
+							<a class="toggle collapse"></a>
+						</div>
+						<div class="body">
+							<p role="{base.school_year} {base.term_type}">
+								<span class="label-text">学年学期</span>
+								<span class="value"></span>
+							</p>
+							<p role="{moon.last_connect_datetime}">
+								<span class="label-text">连接服务器时间</span>
+								<span class="value"></span>
+							</p>
+							<p role="{moon.last_update_date}">
+								<span class="label-text">已上传使用数据</span>
+								<span class="value"></span>
+							</p>
+						</div>
+					</div>
+					<div id="room-card">
+						<div class="header">
+							<div class="line"></div>
+							<span class="title">教室</span>
+							<a class="toggle collapse"></a>
+						</div>
+						<div class="body">
+							<p role="{room.room_name:classno}">
+								<span class="label-text">教室编号</span>
+								<span class="value"></span>
+							</p>
+							<p role="{base.school_year} {base.term_type}">
+								<span class="label-text">学年学期</span>
+								<span class="value"></span>
+							</p>
+							<p role="{room.last_connect_datetime}">
+								<span class="label-text">连接服务器时间</span>
+								<span class="value"></span>
+							</p>
+							<p role="{room.last_update_date}">
+								<span class="label-text">已上传使用数据</span>
+								<span class="value"></span>
+							</p>
+							<p role="{room.boot_time:humanread}">
+								<span class="label-text">开机总时长</span>
+								<span class="value"></span>
+							</p>
+							<p role="{room.use_time:humanread}，{room.to_class_time:classtime}">
+								<span class="label-text">使用总时长</span>
+								<span class="value"></span>
+							</p>
+							<p role="{room.free_time:humanread}">
+								<span class="label-text">空闲总时长</span>
+								<span class="value"></span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			<div id="offline-indicator"></div>
+			<div id="loading-panel" class="loading"></div>
+			<div class="modal hide fade" id="submit-confirm" data-backdrop="static">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h3>提示</h3>
+			  </div>
+			  <div class="modal-body">
+			    <p>是否完成教学点终端初始化申报？</p>
+			  </div>
+			  <div class="modal-footer">
+			    <a href="#" action="close" class="btn">否</a>
+			    <a href="#" action="submit" class="btn btn-primary">是</a>
+			  </div>
+			</div>
+		</div>
+		
+	</body>
+</html>

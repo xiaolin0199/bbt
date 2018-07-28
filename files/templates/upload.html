@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<style type="text/css">
+			label, input {display: block;}
+		</style>
+	</head>
+	<body>
+		<form action="/api/screen-upload/" method="POST" id="my-form" enctype="multipart/form-data">
+			<label for="my-file">select file:</label>
+			<input type="file" id="my-file" name="pic"/>
+            <input type="hidden" name="mac" value="aaa" />
+			<input type="submit" value="UPLOAD">
+		</form>
+		<script type="text/javascript">
+			function $(s){ return document.getElementById(s); }
+			onload = function(){
+				$('my-form').addEventListener('submit', function(e){
+					var fm = this;
+					if(fm.pic && fm.pic.value) {
+						return true;
+					} else {
+						e.preventDefault();
+						return false;
+					}
+				});
+			};
+		</script>
+	</body>
+</html>

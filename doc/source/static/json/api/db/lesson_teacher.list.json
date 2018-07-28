@@ -1,0 +1,77 @@
+{
+    "status": "success",
+    "data":
+    {
+        "page_count": 39,
+        "records": [
+        {
+            "lesson_name__name": "体育",
+            "uuid": "E49AAA6E-938E-11E7-BCA8-C81F663C74F3",
+            "schedule_time": 5,
+            "class_uuid__grade__term__school_year": "2017-2018",
+            "class_uuid__grade__term__term_type": "秋季学期",
+            "remain_time": 48,
+            "class_uuid__grade__name": "一",
+            "teacher__uuid": "EE891ECF-7315-11E6-967B-C81F663C74F3",
+            "teacher__birthday": "1984-10-24",
+            "teacher__name": "罗金玉(841024)",
+            "class_uuid__name": "1"
+        },
+        {
+            "lesson_name__name": "体育",
+            "uuid": "E43DBD5E-938E-11E7-969B-C81F663C74F3",
+            "schedule_time": 5,
+            "class_uuid__grade__term__school_year": "2017-2018",
+            "class_uuid__grade__term__term_type": "秋季学期",
+            "remain_time": 48,
+            "class_uuid__grade__name": "一",
+            "teacher__uuid": "C780E7CF-B8A7-11E3-9443-C81F663C74F3",
+            "teacher__birthday": "1980-02-25",
+            "teacher__name": "李毅",
+            "class_uuid__name": "1"
+        },
+        {
+            "lesson_name__name": "品德与社会",
+            "uuid": "E485269E-938E-11E7-92B0-C81F663C74F3",
+            "schedule_time": 40,
+            "class_uuid__grade__term__school_year": "2017-2018",
+            "class_uuid__grade__term__term_type": "秋季学期",
+            "remain_time": 48,
+            "class_uuid__grade__name": "一",
+            "teacher__uuid": "EE891ECF-7315-11E6-967B-C81F663C74F3",
+            "teacher__birthday": "1984-10-24",
+            "teacher__name": "罗金玉(841024)",
+            "class_uuid__name": "1"
+        },
+        {
+            "lesson_name__name": "地校2",
+            "uuid": "E2BFCFEE-938E-11E7-900F-C81F663C74F3",
+            "schedule_time": 10,
+            "class_uuid__grade__term__school_year": "2017-2018",
+            "class_uuid__grade__term__term_type": "秋季学期",
+            "remain_time": 48,
+            "class_uuid__grade__name": "一",
+            "teacher__uuid": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "teacher__birthday": "1977-11-25",
+            "teacher__name": "王冬菊",
+            "class_uuid__name": "1"
+        },
+        {
+            "lesson_name__name": "地校3",
+            "uuid": "E2C9BB00-938E-11E7-BD80-C81F663C74F3",
+            "schedule_time": 10,
+            "class_uuid__grade__term__school_year": "2017-2018",
+            "class_uuid__grade__term__term_type": "秋季学期",
+            "remain_time": 48,
+            "class_uuid__grade__name": "一",
+            "teacher__uuid": "C8870D30-B8A7-11E3-B426-C81F663C74F3",
+            "teacher__birthday": "1977-11-25",
+            "teacher__name": "王冬菊",
+            "class_uuid__name": "1"
+        }],
+        "record_count": 192,
+        "page": 1,
+        "page_size": 5
+    },
+    "success": true
+}

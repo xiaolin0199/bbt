@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="renderer" content="webkit">
+<title>维护模式 - 噢易班班通管理分析系统</title>
+<link rel="shortcut icon" type="image/ico" href="/public/images/favicon.ico">
+<link rel="icon" type="image/ico" href="/public/images/favicon.ico">
+<link type="text/css" rel="stylesheet" href="/public/js/extjs/resources/css/ext-all.css"/>
+<style type="text/css">
+.no-bg {background:none;}
+</style>
+<script type="text/javascript" src="/public/js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="/public/js/extjs/locale/ext-lang-zh_CN.js"></script>
+<script type="text/javascript">
+    Ext.onReady(function(){
+        var validateCB = function(fm, action){
+            var data = action.result, script;
+            if(data.status == "success") {
+                script = document.createElement('script');
+                script.type = "text/javascript";
+                script.src = '/public/js/maintain.js'
+                document.body.appendChild(script);
+                fm.owner.up('window').destroy();
+            } else {
+                Ext.Msg.alert('错误', data.msg);
+            }
+        };
+        new Ext.window.Window({
+            title: '授权',
+            autoShow: true,
+            modal: true,
+            layout: 'fit',
+            items: [{
+                xtype: 'form',
+                border: false,
+                bodyCls: 'no-bg',
+                margin: 30,
+                items: [{
+                    xtype: 'textfield',
+                    fieldLabel: '请输入授权码',
+                    name: 'password'
+                }]
+            }],
+            buttons: [{
+                text: '验证',
+                handler: function(){
+                    var fm = this.up('window').down('form');
+                    fm.getForm().submit({
+                        url: '/maintain/auth/',
+                        success: validateCB,
+                        failure: validateCB
+                    });
+                }
+            }],
+            buttonAlign: 'center'
+        });
+    });
+</script>
+</head>
+<body>
+    
+</body>
+</html>
